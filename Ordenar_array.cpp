@@ -14,7 +14,7 @@ void ordenar(int* inicio, int* fin){
 }
 
 int main() {
-    int A[] = {15, 3, 27, 49, 77, 48, 2, 34, 56, 98};
+    int A[] = {48, 2, 34, 56, 98, 15, 3, 27, 49, 77};
     int n = sizeof(A) / sizeof(A[0]);
 
     int* inicio = A;
