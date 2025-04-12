@@ -10,7 +10,8 @@ void imprimirMatriz(int (*matriz)[3]) {
         if (*p == 0)
             cout << "   ";
         else
-            cout << *p << (*p < 10 ? "  " : " ");
+            //cout << *p << (*p < 10 ? "  " : " ");   #si se pone números de 2 dígitos
+            cout << *p << "  ";
         p++;
         contador++;
         if (contador % N == 0) cout << endl;
