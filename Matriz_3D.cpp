@@ -44,7 +44,6 @@ int main() {
         }
     }
 
-    // Mostrar resultados usando punteros
     cout << "Matriz A:" << endl;
     int (*A)[3] = array3D[0];
     for(int i = 0; i < 3; i++) {
@@ -74,7 +73,6 @@ int main() {
         cout << endl;
     }
 
-    // Liberar memoria
     delete[] matrizA;
     delete[] matrizB;
     delete[] resultado;
