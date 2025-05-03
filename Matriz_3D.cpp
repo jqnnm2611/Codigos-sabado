@@ -4,34 +4,28 @@
 
 using namespace std;
 
-int main() {
-    srand(time(NULL));
-
-    int (*matrizA)[3] = new int[3][3];
-    int (*matrizB)[3] = new int[3][3];
-    int (*resultado)[3] = new int[3][3];
-
-    int *llenar = &matrizA[0][0];
+// 1. Función para llenar matrices 3x3 con valores aleatorios
+void llenarMatriz(int (*matriz)[3]) {
+    int *ptr = &matriz[0][0];
     for(int i = 0; i < 9; i++) {
-        *llenar++ = rand() % 10;
+        *ptr++ = rand() % 10;
     }
-    
-    llenar = &matrizB[0][0];
-    for(int i = 0; i < 9; i++) {
-        *llenar++ = rand() % 10;
-    }
+}
 
+// 2. Función para multiplicar matrices 3x3
+void multiplicarMatrices(int (*A)[3], int (*B)[3], int (*resultado)[3]) {
     for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 3; j++) {
             *(*(resultado + i) + j) = 0;
             for(int k = 0; k < 3; k++) {
-                *(*(resultado + i) + j) += *(*(matrizA + i) + k) * *(*(matrizB + k) + j);
+                *(*(resultado + i) + j) += *(*(A + i) + k) * *(*(B + k) + j);
             }
         }
     }
+}
 
-    int (*array3D)[3][3] = new int[3][3][3];
-
+// 3. Función para llenar matriz 3D con las 3 matrices
+void llenarArray3D(int (*array3D)[3][3], int (*matrizA)[3], int (*matrizB)[3], int (*resultado)[3]) {
     int (*Capa0)[3] = array3D[0];
     int (*Capa1)[3] = array3D[1];
     int (*Capa2)[3] = array3D[2];
@@ -43,7 +37,28 @@ int main() {
             *(*(Capa2 + i) + j) = *(*(resultado + i) + j);
         }
     }
+}
 
+int main() {
+    srand(time(NULL));
+
+    // Reservar memoria
+    int (*matrizA)[3] = new int[3][3];
+    int (*matrizB)[3] = new int[3][3];
+    int (*resultado)[3] = new int[3][3];
+    int (*array3D)[3][3] = new int[3][3][3];
+
+    // Llenar matrices
+    llenarMatriz(matrizA);
+    llenarMatriz(matrizB);
+    
+    // Multiplicar matrices
+    multiplicarMatrices(matrizA, matrizB, resultado);
+    
+    // Llenar array 3D
+    llenarArray3D(array3D, matrizA, matrizB, resultado);
+
+    // Impresión (se mantiene igual)
     cout << "Matriz A:" << endl;
     int (*A)[3] = array3D[0];
     for(int i = 0; i < 3; i++) {
@@ -73,6 +88,7 @@ int main() {
         cout << endl;
     }
 
+    // Liberar memoria
     delete[] matrizA;
     delete[] matrizB;
     delete[] resultado;
